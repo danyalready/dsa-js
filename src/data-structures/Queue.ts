@@ -1,4 +1,4 @@
-export class Stack {
+export class Queue {
     private items: Array<any>;
 
     constructor() {
@@ -9,16 +9,16 @@ export class Stack {
         return this.items.length;
     }
 
-    pop() {
-        return this.items.pop();
-    }
-
-    push(item: any) {
+    enqueue(item: any) {
         return this.items.push(item);
     }
 
+    dequeue() {
+        return this.items.shift();
+    }
+
     peek() {
-        return this.items[this.length - 1];
+        return this.items[0];
     }
 
     isEmpty() {
