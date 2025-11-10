@@ -1,5 +1,5 @@
-export class Stack {
-    private items: Array<any>;
+export class Stack<T> {
+    private items: Array<T>;
 
     constructor() {
         this.items = [];
@@ -9,19 +9,23 @@ export class Stack {
         return this.items.length;
     }
 
-    pop() {
-        return this.items.pop();
+    pop(): T {
+        if (this.isEmpty()) {
+            throw new Error('No items in a stack to pop.');
+        }
+
+        return this.items.pop()!;
     }
 
-    push(item: any) {
-        return this.items.push(item);
+    push(item: T): void {
+        this.items.push(item);
     }
 
-    peek() {
+    peek(): T {
         return this.items[this.length - 1];
     }
 
-    isEmpty() {
+    isEmpty(): boolean {
         return this.length === 0;
     }
 }

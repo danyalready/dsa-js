@@ -1,5 +1,5 @@
-export class Queue {
-    private items: Array<any>;
+export class Queue<T> {
+    private items: Array<T>;
 
     constructor() {
         this.items = [];
@@ -9,19 +9,23 @@ export class Queue {
         return this.items.length;
     }
 
-    enqueue(item: any) {
-        return this.items.push(item);
+    enqueue(item: T): void {
+        this.items.push(item);
     }
 
-    dequeue() {
-        return this.items.shift();
+    dequeue(): T {
+        if (this.isEmpty()) {
+            throw new Error('No items in a queue to dequeue.');
+        }
+
+        return this.items.shift()!;
     }
 
-    peek() {
+    peek(): T {
         return this.items[0];
     }
 
-    isEmpty() {
+    isEmpty(): boolean {
         return this.length === 0;
     }
 }
