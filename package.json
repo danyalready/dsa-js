@@ -1,10 +1,12 @@
 {
-  "name": "javascript-data-structures",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "http": "http-server",
-    "live": "live-server"
-  }
+    "name": "javascript-data-structures",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    }
 }
