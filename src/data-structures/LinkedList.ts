@@ -51,8 +51,8 @@ export class LinkedList<T> {
         let currentNode = this.head!.next;
         let currentIndex = 1;
 
-        while (currentIndex < index) {
-            currentNode = currentNode!.next;
+        while (currentIndex < index && currentNode) {
+            currentNode = currentNode.next;
             currentIndex++;
         }
 
@@ -81,9 +81,9 @@ export class LinkedList<T> {
         let currentNode = this.head!.next;
         let currentIndex = 1;
 
-        while (currentIndex < index) {
+        while (currentIndex < index && currentNode) {
             previousNode = currentNode;
-            currentNode = currentNode!.next;
+            currentNode = currentNode.next;
 
             currentIndex++;
         }
@@ -97,6 +97,21 @@ export class LinkedList<T> {
         if (index === this.length - 1) this.tail = previousNode!;
 
         this.length--;
+    }
+
+    toArray(): T[] {
+        const items: T[] = [];
+
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while (currentIndex < this.length && currentNode) {
+            items.push(currentNode.value);
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        return items;
     }
 
     isEmpty(): boolean {
