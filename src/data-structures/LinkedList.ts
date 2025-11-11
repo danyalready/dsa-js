@@ -1,5 +1,6 @@
 class Node<T> {
     value: T;
+    prev: Node<T> | null = null;
     next: Node<T> | null = null;
 
     constructor(value: T) {
@@ -19,6 +20,7 @@ export class LinkedList<T> {
             this.head = newNode;
             this.tail = newNode;
         } else {
+            newNode.prev = this.tail;
             this.tail!.next = newNode;
             this.tail = newNode;
         }
@@ -33,6 +35,7 @@ export class LinkedList<T> {
             this.head = newNode;
             this.tail = newNode;
         } else {
+            this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
         }
@@ -68,21 +71,34 @@ export class LinkedList<T> {
             throw new Error(`Cannot reach item with index: ${index}.`);
         }
 
+        // Removing the first item in the list
         if (index === 0) {
-            this.head = this.head!.next;
+            if (this.length === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.head = this.head!.next;
+                this.head!.prev = null;
+            }
+
             this.length--;
-
-            if (this.length === 0) this.tail = null;
-
             return;
         }
 
-        let previousNode = this.head;
+        // Removing the last item in the list
+        if (index === this.length - 1) {
+            this.tail = this.tail!.prev;
+            this.tail!.next = null;
+
+            this.length--;
+            return;
+        }
+
+        // Removing the item from a middle of the list
         let currentNode = this.head!.next;
         let currentIndex = 1;
 
         while (currentIndex < index && currentNode) {
-            previousNode = currentNode;
             currentNode = currentNode.next;
 
             currentIndex++;
@@ -92,9 +108,8 @@ export class LinkedList<T> {
             throw new Error(`Node not found at index: ${index}`);
         }
 
-        previousNode!.next = currentNode.next;
-
-        if (index === this.length - 1) this.tail = previousNode!;
+        currentNode.prev!.next = currentNode.next;
+        currentNode.next!.prev = currentNode.prev;
 
         this.length--;
     }
