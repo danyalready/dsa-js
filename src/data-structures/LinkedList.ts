@@ -9,9 +9,9 @@ class Node<T> {
 }
 
 export class LinkedList<T> {
-    public head: Node<T> | null = null;
-    public tail: Node<T> | null = null;
-    public length: number = 0;
+    head: Node<T> | null = null;
+    tail: Node<T> | null = null;
+    length: number = 0;
 
     append(value: T): void {
         const newNode = new Node(value);
@@ -51,19 +51,23 @@ export class LinkedList<T> {
         if (index === 0) return this.head!.value;
         if (index === this.length - 1) return this.tail!.value;
 
-        let currentNode = this.head!.next;
-        let currentIndex = 1;
+        if (index < this.length / 2) {
+            let currentNode = this.head;
 
-        while (currentIndex < index && currentNode) {
-            currentNode = currentNode.next;
-            currentIndex++;
+            for (let i = 0; i < index; i++) {
+                currentNode = currentNode!.next;
+            }
+
+            return currentNode!.value;
+        } else {
+            let currentNode = this.tail;
+
+            for (let i = this.length - 1; i > index; i--) {
+                currentNode = currentNode!.prev;
+            }
+
+            return currentNode!.value;
         }
-
-        if (!currentNode) {
-            throw new Error(`Node not found at index: ${index}`);
-        }
-
-        return currentNode.value;
     }
 
     delete(index: number): void {
@@ -94,36 +98,43 @@ export class LinkedList<T> {
             return;
         }
 
-        // Removing the item from a middle of the list
-        let currentNode = this.head!.next;
-        let currentIndex = 1;
+        if (index < this.length / 2) {
+            let currentNode = this.head;
 
-        while (currentIndex < index && currentNode) {
-            currentNode = currentNode.next;
+            for (let i = 0; i < index; i++) {
+                currentNode = currentNode!.next;
+            }
 
-            currentIndex++;
+            currentNode!.prev!.next = currentNode!.next;
+            currentNode!.next!.prev = currentNode!.prev;
+        } else {
+            let currentNode = this.tail;
+
+            for (let i = this.length - 1; i > index; i--) {
+                currentNode = currentNode!.prev;
+            }
+
+            currentNode!.prev!.next = currentNode!.next;
+            currentNode!.next!.prev = currentNode!.prev;
         }
-
-        if (!currentNode) {
-            throw new Error(`Node not found at index: ${index}`);
-        }
-
-        currentNode.prev!.next = currentNode.next;
-        currentNode.next!.prev = currentNode.prev;
 
         this.length--;
+    }
+
+    clear() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
     }
 
     toArray(): T[] {
         const items: T[] = [];
 
         let currentNode = this.head;
-        let currentIndex = 0;
 
-        while (currentIndex < this.length && currentNode) {
+        while (currentNode) {
             items.push(currentNode.value);
             currentNode = currentNode.next;
-            currentIndex++;
         }
 
         return items;
