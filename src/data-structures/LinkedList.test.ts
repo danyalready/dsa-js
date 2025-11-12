@@ -39,6 +39,17 @@ describe('LinkedList', () => {
         expect(linkedList.get(2)).toBe(3);
     });
 
+    test('`getIndex` method returns an index of the given value.', () => {
+        linkedList.append(1);
+        linkedList.append(2);
+        linkedList.append(3);
+
+        expect(linkedList.getIndex(1)).toBe(0);
+        expect(linkedList.getIndex(2)).toBe(1);
+        expect(linkedList.getIndex(3)).toBe(2);
+        expect(linkedList.getIndex(4)).toBe(-1);
+    });
+
     test('`isEmpty` method checks if the list is empty', () => {
         expect(linkedList.isEmpty()).toBe(true);
 

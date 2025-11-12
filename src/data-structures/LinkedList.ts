@@ -70,6 +70,24 @@ export class LinkedList<T> {
         }
     }
 
+    getIndex(value: T): number {
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while (currentNode) {
+            if (currentNode.value === value) {
+                break;
+            }
+
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        if (currentNode) return currentIndex;
+
+        return -1;
+    }
+
     delete(index: number): void {
         if (index >= this.length || index < 0) {
             throw new Error(`Cannot reach item with index: ${index}.`);
