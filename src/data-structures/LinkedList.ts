@@ -43,13 +43,25 @@ export class LinkedList<T> {
         this.length++;
     }
 
-    get(index: number): T {
+    insert(index: number, value: T) {
+        const newNode = new Node(value);
+        const currentNode = this.get(index);
+
+        if (!currentNode.prev) this.head = newNode;
+
+        newNode.next = currentNode;
+        newNode.prev = currentNode.prev;
+        currentNode.prev = newNode;
+        this.length++;
+    }
+
+    get(index: number): Node<T> {
         if (index >= this.length || index < 0) {
             throw new Error(`Cannot reach item with index: ${index}.`);
         }
 
-        if (index === 0) return this.head!.value;
-        if (index === this.length - 1) return this.tail!.value;
+        if (index === 0) return this.head!;
+        if (index === this.length - 1) return this.tail!;
 
         if (index < this.length / 2) {
             let currentNode = this.head;
@@ -58,7 +70,7 @@ export class LinkedList<T> {
                 currentNode = currentNode!.next;
             }
 
-            return currentNode!.value;
+            return currentNode!;
         } else {
             let currentNode = this.tail;
 
@@ -66,7 +78,7 @@ export class LinkedList<T> {
                 currentNode = currentNode!.prev;
             }
 
-            return currentNode!.value;
+            return currentNode!;
         }
     }
 

@@ -29,14 +29,36 @@ describe('LinkedList', () => {
         expect(linkedList.toArray()).toEqual([1, 2, 3]);
     });
 
-    test('`get` method returns an item in the given index', () => {
+    test('`insert` method inserts an item at the given index', () => {
+        linkedList.append(1);
+        linkedList.append(2);
+        linkedList.append(3);
+        linkedList.insert(0, 11);
+
+        expect(linkedList.length).toBe(4);
+        expect(linkedList.head?.value).toBe(11);
+        expect(linkedList.head?.prev).toBe(null);
+        expect(linkedList.head?.next?.value).toBe(1);
+        expect(linkedList.head?.next?.prev).toBe(linkedList.head);
+
+        linkedList.insert(3, 22);
+
+        expect(linkedList.length).toBe(5);
+        expect(linkedList.tail?.value).toBe(3);
+        expect(linkedList.tail?.prev?.value).toBe(22);
+        expect(linkedList.get(3).value).toBe(22);
+        expect(linkedList.get(3).prev?.value).toBe(2);
+        expect(linkedList.get(3).next?.value).toBe(3);
+    });
+
+    test('`get` method returns a node in the given index', () => {
         linkedList.append(1);
         linkedList.append(2);
         linkedList.append(3);
 
-        expect(linkedList.get(0)).toBe(1);
-        expect(linkedList.get(1)).toBe(2);
-        expect(linkedList.get(2)).toBe(3);
+        expect(linkedList.get(0).value).toBe(1);
+        expect(linkedList.get(1).value).toBe(2);
+        expect(linkedList.get(2).value).toBe(3);
     });
 
     test('`getIndex` method returns an index of the given value.', () => {
