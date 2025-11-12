@@ -86,4 +86,21 @@ describe('LinkedList', () => {
         expect(linkedList.head!.next).toBe(linkedList.tail);
         expect(linkedList.tail!.prev).toBe(linkedList.head);
     });
+
+    test('`reverse` methods reverses the list', () => {
+        linkedList.append(1);
+        linkedList.append(2);
+        linkedList.append(3);
+        linkedList.append(4);
+        linkedList.append(5);
+        linkedList.reverse();
+
+        expect(linkedList.toArray()).toEqual([5, 4, 3, 2, 1]);
+        expect(linkedList.head?.value).toBe(5);
+        expect(linkedList.tail?.value).toBe(1);
+        expect(linkedList.head?.next?.value).toBe(4);
+        expect(linkedList.head?.prev).toBe(null);
+        expect(linkedList.tail?.next).toBe(null);
+        expect(linkedList.tail?.prev?.value).toBe(2);
+    });
 });

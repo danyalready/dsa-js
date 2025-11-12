@@ -121,6 +121,27 @@ export class LinkedList<T> {
         this.length--;
     }
 
+    reverse() {
+        let currentNode = this.tail;
+
+        while (currentNode) {
+            if (!currentNode.next) {
+                this.head = currentNode;
+            }
+
+            if (!currentNode.prev) {
+                this.tail = currentNode;
+            }
+
+            const currentNodeNext = currentNode.next;
+            const currentNodePrev = currentNode.prev;
+
+            currentNode.next = currentNodePrev;
+            currentNode.prev = currentNodeNext;
+            currentNode = currentNodePrev;
+        }
+    }
+
     clear() {
         this.head = null;
         this.tail = null;

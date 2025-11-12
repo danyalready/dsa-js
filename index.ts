@@ -6,6 +6,6 @@ linkedList.append(2);
 linkedList.append(3);
 linkedList.append(4);
 linkedList.append(5);
-linkedList.delete(2);
+linkedList.reverse();
 
 console.log(linkedList.toArray());
