@@ -36,11 +36,16 @@ export class HashTable<T> {
         return pair ? pair[1] : undefined;
     }
 
-    delete(key: string): void {
+    delete(key: string): boolean {
         const index = this.hash(key);
         const bucket = this.buckets[index];
         const pairIndex = bucket.findIndex(([k]) => k === key);
 
-        if (pairIndex !== -1) bucket.splice(pairIndex, 1);
+        if (pairIndex !== -1) {
+            bucket.splice(pairIndex, 1);
+            return true;
+        }
+
+        return false;
     }
 }
