@@ -8,7 +8,7 @@ class Node<T> {
     }
 }
 
-export class BinaryTree<T> {
+export class BinarySearchTree<T extends number | string> {
     root: Node<T> | null = null;
 
     addNode(value: T): void {
@@ -123,6 +123,7 @@ export class BinaryTree<T> {
             let currentLeftNode = rightSubTree;
             let isSpaceFound = false;
 
+            // Removing the `nodeToRemove`
             if (parentNode) {
                 if (parentNode.leftChild === nodeToRemove) {
                     parentNode.leftChild = rightSubTree;
@@ -142,7 +143,11 @@ export class BinaryTree<T> {
                 }
             }
 
-            currentLeftParent!.leftChild = leftSubTree;
+            if (!currentLeftParent) {
+                throw new Error('`currentLeftParent` is not found.');
+            }
+
+            currentLeftParent.leftChild = leftSubTree;
         }
     }
 }
