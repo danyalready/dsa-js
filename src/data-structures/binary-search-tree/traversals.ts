@@ -1,7 +1,8 @@
-import { Queue } from '../Queue';
-import { Node } from './BinarySearchTree';
+import { Queue } from '../queue/Queue';
+import type { Node } from './BinarySearchTree';
 
 export const BINARY_TREE_TRAVERSALS = {
+    // Depth-First Traversals (DFS)
     inOrder: function <T>(node: Node<T> | null, visitFunction: (node: Node<T>) => void) {
         if (node) {
             BINARY_TREE_TRAVERSALS.inOrder(node.leftChild, visitFunction);
