@@ -1,4 +1,4 @@
-class Node<T> {
+export class Node<T> {
     value: T;
     leftChild: Node<T> | null = null;
     rightChild: Node<T> | null = null;
