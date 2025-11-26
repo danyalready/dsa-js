@@ -1,4 +1,5 @@
-import type { Node } from './BinarySearchTree';
+import { Queue } from '../Queue';
+import { Node } from './BinarySearchTree';
 
 export const BINARY_TREE_TRAVERSALS = {
     inOrder: function <T>(node: Node<T> | null, visitFunction: (node: Node<T>) => void) {
@@ -20,6 +21,21 @@ export const BINARY_TREE_TRAVERSALS = {
             BINARY_TREE_TRAVERSALS.postOrder(node.leftChild, visitFunction);
             BINARY_TREE_TRAVERSALS.postOrder(node.rightChild, visitFunction);
             visitFunction(node);
+        }
+    },
+    // Breadth-First Traversal (BFS)
+    bfs: function <T>(node: Node<T> | null, visitFunction: (node: Node<T>) => void) {
+        const queue = new Queue<Node<T>>();
+
+        if (node) queue.enqueue(node);
+
+        while (!queue.isEmpty()) {
+            const node = queue.dequeue();
+
+            visitFunction(node);
+
+            if (node.leftChild) queue.enqueue(node.leftChild);
+            if (node.rightChild) queue.enqueue(node.rightChild);
         }
     },
 };

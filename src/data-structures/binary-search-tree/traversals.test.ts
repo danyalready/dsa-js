@@ -59,6 +59,16 @@ describe('BINARY_TREE_TRAVERSALS', () => {
         expect(visited).toEqual(['D', 'E', 'B', 'F', 'G', 'C', 'A']);
     });
 
+    test('bfs traversal (Top → Bottom, Left → Right)', () => {
+        const visited: string[] = [];
+
+        BINARY_TREE_TRAVERSALS.bfs(root, (node) => {
+            visited.push(node.value);
+        });
+
+        expect(visited).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
+    });
+
     test('should handle null root safely', () => {
         const visited: string[] = [];
 
