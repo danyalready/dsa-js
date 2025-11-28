@@ -1,3 +1,4 @@
+import { Queue } from '../queue/Queue';
 import { Stack } from '../stack/Stack';
 import type { Node } from './Graph';
 
@@ -39,6 +40,31 @@ export const GRAPH_TRAVERSALS = {
 
                 for (const edgeNode of stackNode.edges) {
                     stack.push(edgeNode);
+                }
+            }
+        }
+    },
+    // Breadth-First Traversals (BFS)
+    bfs: function <T>(nodes: Node<T>[], visitFunction: (node: Node<T>) => void) {
+        const visited = new Set<Node<T>>();
+
+        for (const node of nodes) {
+            if (visited.has(node)) continue;
+
+            const queue = new Queue<Node<T>>();
+
+            queue.enqueue(node);
+
+            while (!queue.isEmpty()) {
+                const queueNode = queue.dequeue();
+
+                if (visited.has(queueNode)) continue;
+
+                visitFunction(queueNode);
+                visited.add(queueNode);
+
+                for (const edgeNode of queueNode.edges) {
+                    queue.enqueue(edgeNode);
                 }
             }
         }

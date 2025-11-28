@@ -71,6 +71,16 @@ describe('BINARY_TREE_TRAVERSALS', () => {
         expect(visited).toEqual(['A', 'H', 'C', 'G', 'F', 'B', 'E', 'D']);
     });
 
+    test('bfs traversal (Breadth First Search', () => {
+        const visited: string[] = [];
+
+        GRAPH_TRAVERSALS.bfs(nodes, (node) => {
+            visited.push(node.value);
+        });
+
+        expect(visited).toEqual(['A', 'B', 'H', 'D', 'E', 'C', 'F', 'G']);
+    });
+
     test('should handle null root safely', () => {
         const visited: string[] = [];
 
