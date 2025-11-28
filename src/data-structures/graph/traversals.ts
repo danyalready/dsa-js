@@ -54,16 +54,17 @@ export const GRAPH_TRAVERSALS = {
             const queue = new Queue<Node<T>>();
 
             queue.enqueue(node);
+            visited.add(node);
 
             while (!queue.isEmpty()) {
                 const queueNode = queue.dequeue();
 
-                if (visited.has(queueNode)) continue;
-
                 visitFunction(queueNode);
-                visited.add(queueNode);
 
                 for (const edgeNode of queueNode.edges) {
+                    if (visited.has(edgeNode)) continue;
+
+                    visited.add(edgeNode);
                     queue.enqueue(edgeNode);
                 }
             }
