@@ -1,9 +1,5 @@
 export class Stack<T> {
-    private items: Array<T>;
-
-    constructor() {
-        this.items = [];
-    }
+    private items: Array<T> = [];
 
     get length(): number {
         return this.items.length;

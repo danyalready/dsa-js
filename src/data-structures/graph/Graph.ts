@@ -1,20 +1,18 @@
-class Node<T> {
+export class Node<T> {
     value: T;
-    edges: Node<T>[];
+    edges: Node<T>[] = [];
 
     constructor(value: T) {
         this.value = value;
-        this.edges = [];
     }
 }
 
 export class Graph<T> {
     directed: boolean;
-    nodes: Node<T>[];
+    nodes: Node<T>[] = [];
 
     constructor(directed = false) {
         this.directed = directed;
-        this.nodes = [];
     }
 
     addNode(value: T) {
