@@ -1,3 +1,4 @@
+import { Queue } from '../queue/Queue';
 import { Stack } from '../stack/Stack';
 import type { Node } from './Graph';
 
@@ -29,15 +30,15 @@ export const GRAPH_TRAVERSALS = {
 
             stack.push(node);
 
-            while (stack.length) {
-                const node = stack.pop();
+            while (!stack.isEmpty()) {
+                const stackNode = stack.pop();
 
-                if (visited.has(node)) continue;
+                if (visited.has(stackNode)) continue;
 
-                visitFunction(node);
-                visited.add(node);
+                visitFunction(stackNode);
+                visited.add(stackNode);
 
-                for (const edgeNode of node.edges) {
+                for (const edgeNode of stackNode.edges) {
                     stack.push(edgeNode);
                 }
             }
