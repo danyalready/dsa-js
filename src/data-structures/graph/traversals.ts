@@ -1,4 +1,3 @@
-import { Queue } from '../queue/Queue';
 import { Stack } from '../stack/Stack';
 import type { Node } from './Graph';
 

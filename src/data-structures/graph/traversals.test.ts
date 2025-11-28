@@ -51,15 +51,15 @@ describe('BINARY_TREE_TRAVERSALS', () => {
         nodes = [A, B, C, D, E, F, G, H];
     });
 
-    // test('dfs traversal (Depth First Search)', () => {
-    //     const visited: string[] = [];
+    test('dfs traversal (Depth First Search)', () => {
+        const visited: string[] = [];
 
-    //     GRAPH_TRAVERSALS.dfs(nodes, (node) => {
-    //         visited.push(node.value);
-    //     });
+        GRAPH_TRAVERSALS.dfs(nodes, (node) => {
+            visited.push(node.value);
+        });
 
-    //     expect(visited).toEqual(['A', 'B', 'D', 'E', 'F', 'C', 'H', 'G']);
-    // });
+        expect(visited).toEqual(['A', 'B', 'D', 'E', 'F', 'C', 'H', 'G']);
+    });
 
     test('dfs-iterative traversal (Depth First Search)', () => {
         const visited: string[] = [];
