@@ -1,15 +1,18 @@
 export function isPalindrome(row: string): boolean {
-    const trimmed = row.replace(" ", "");
+    let l = 0;
+    let r = row.length - 1;
 
-    let left = 0;
-    let right = trimmed.length - 1;
+    while (l < r) {
+        while (l < r && /[^a-z]/i.test(row[l])) l++;
+        while (l < r && /[^a-z]/i.test(row[r])) r--;
 
-    while (left < right) {
-        if (trimmed[left] !== trimmed[right]) return false;
+        if (row[l].toLowerCase() !== row[r].toLowerCase()) return false;
 
-        left++;
-        right--;
+        l++;
+        r--;
     }
 
     return true;
 }
+
+console.log(isPalindrome("A man, a plan, a canal: Panama"));
