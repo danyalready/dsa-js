@@ -3,19 +3,19 @@ const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin });
 
 rl.on("line", (input) => {
-    const N = +input;
+    const n = +input;
 
-    console.log(...factors(N));
+    console.log(...factors(n));
 
     rl.close();
 });
 
-function factors(N) {
-    let k = Math.floor(Math.sqrt(N));
+function factors(n) {
+    let k = Math.floor(Math.sqrt(n));
 
     while (k > 0) {
         const a = k;
-        const b = N / a;
+        const b = n / k;
 
         if (Number.isInteger(b)) return [a, b];
 

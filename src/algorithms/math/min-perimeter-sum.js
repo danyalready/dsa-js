@@ -12,19 +12,10 @@ rl.on("line", (input) => {
 
 function minPerimeterSum(N) {
     let k = Math.floor(Math.sqrt(N));
-    const minSides = [Infinity, Infinity];
 
     while (k > 0) {
-        const a = k;
-        const b = N / k;
-
-        if (Number.isInteger(b) && minSides[0] + minSides[1] > a + b) {
-            minSides[0] = a;
-            minSides[1] = b;
-        }
+        if (N % k === 0) return [k, N / k];
 
         k--;
     }
-
-    return minSides;
 }
