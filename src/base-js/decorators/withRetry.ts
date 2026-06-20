@@ -1,7 +1,7 @@
 function withRetry<T extends (this: ThisParameterType<any>, ...args: any[]) => any>(
     fn: T,
     maxRetries: number,
-): (this: ThisParameterType<T>, ...args: Parameters<T>) => Promise<ReturnType<T>> {
+): (this: ThisParameterType<T>, ...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>> {
     return async function (this: ThisParameterType<T>, ...args: Parameters<T>) {
         let lastError: unknown;
 
