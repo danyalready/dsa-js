@@ -26,3 +26,15 @@ const fn = function (n: number) {
 };
 
 console.log(array.groupBy(fn));
+
+type F = (this: any, ...args: any[]) => void;
+
+function debounce(fn: F, t: number): F {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => fn.apply(this, args), t);
+    };
+}
